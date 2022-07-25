@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class ProductController {
 
-    private final ProductSergivice productService;
+    private final ProductService productService;
 
     @Autowired
     public ProductController(ProductService productService) {
@@ -20,7 +20,7 @@ public class ProductController {
     }
 
     // List
-    @GetMapping("/index")
+    @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("products", productService.list());
         return "products";
@@ -30,7 +30,7 @@ public class ProductController {
     @GetMapping("/product/{id}")
     public String productInfo(@PathVariable Long id, Model model) {
         model.addAttribute("product", productService.getProductById(id));
-        return "createProduct";
+        return "products-info";
     }
 
     // Add product
@@ -43,13 +43,13 @@ public class ProductController {
     @PostMapping("/product/create")
     public String addProduct(Product product) {
         productService.saveProduct(product);
-        return "redirect:/index";
+        return "redirect:/";
     }
 
     // delete
-    @GetMapping("deleteProduct/{id}")
+    @GetMapping("/product/deleteProduct/{id}")
     public String deleteProduct(@PathVariable("id") Long id) {
         productService.deleteProduct(id);
-        return "redirect:/index";
+        return "redirect:/";
     }
 }

@@ -7,50 +7,15 @@
     <title>Document</title>
 </head>
 <body>
-
+<h1>BUYSELL</h1><hr>
 <div th:switch="${products}">
     <div>
         <h4>Товары со всей Казахстана</h4>
 
-        <table>
-            <thead>
-            <tr>
-                <th>Id</th>
-                <br>
-                <th>Названия</th>
-                <br>
-                <th>Описания</th>
-                <br>
-                <th>Цена</th>
-                <br>
-                <th>Город</th>
-                <br>
-                <th>Автор</th>
-                <br>
-            </tr>
-            </thead>
-            <tbody>
-
-            <tr th:each="product : ${products}">
-                <td th:text="${product.getId()}"></td>
-                <td th:text="${product.getTitle()}"></td>
-                <td th:text="${product.getDescription()}"></td>
-                <td th:text="${product.getPrice()}"></td>
-                <td th:text="${product.getCity()}"></td>
-                <td th:text="${product.getAuthor()}"></td>
-                <td>
-                    <button>
-                        <a th:href="@{editProduct/{id}(id=${product.id})}">Редактировать</a>
-                    </button>
-                </td>
-                <td>
-                    <button>
-                        <a th:href="@{deleteProduct/{id}(id=${product.id})}">Удалить</a>
-                    </button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <div th:each="product : ${products}">
+            <p><b th:text="${product.title}"></b> | <a th:href="@{/product/{id}(id=${product.id})}">Подробнее...</a></p>
+        </div>
+        <hr>
     </div>
     <br>
     <button>
