@@ -7,6 +7,7 @@
     <title>Create</title>
 </head>
 <body>
+<h1>BUYSELL</h1><hr>
 <h3>Создать новый товар</h3>
 <form action="#" th:action="@{/product/create}" th:object="${product}" method="post">
     <br><br>
@@ -24,6 +25,7 @@
     <br><br>
     <label for="author">Автор</label>
     <input type="text" th:field="*{author}" id="author">
+    <hr>
     <br><br>
     <input type="submit" value="Добавить">
     <button><a href="/">Назад</a></button>
