@@ -1,0 +1,32 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create</title>
+</head>
+<body>
+<h3>Создать новый товар</h3>
+<form action="#" th:action="@{/product/create}" th:object="${product}" method="post">
+    <br><br>
+    <label for="name">Названия продукта</label>
+    <input type="text" th:field="*{title}" id="name">
+    <br><br>
+    <label for="description">Описания</label>
+    <input type="text" th:field="*{description}" id="description">
+    <br><br>
+    <label for="price">Цена</label>
+    <input type="number" th:field="*{price}" id="price">
+    <br><br>
+    <label for="city">Город</label>
+    <input type="text" th:field="*{city}" id="city">
+    <br><br>
+    <label for="author">Автор</label>
+    <input type="text" th:field="*{author}" id="author">
+    <br><br>
+    <input type="submit" value="Добавить">
+    <button><a href="/index">Назад</a></button>
+</form>
+</body>
+</html>
