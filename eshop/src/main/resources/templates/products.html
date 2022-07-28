@@ -18,9 +18,39 @@
         <hr>
     </div>
     <br>
-    <button>
-        <a href="/addProduct">Добавить продукта</a>
-    </button>
+
+    <h3>Создать новый товар</h3>
+    <form th:action="@{/product/create}"
+          method="post" enctype="multipart/form-data">
+        <br><br>
+        <label for="name">Названия продукта</label>
+        <input type="text" name="title" id="name">
+        <br><br>
+        <label for="description">Описания</label>
+        <input type="text" name="description" id="description">
+        <br><br>
+        <label for="price">Цена</label>
+        <input type="number" name="price" id="price">
+        <br><br>
+        <label for="city">Город</label>
+        <input type="text" name="city" id="city">
+        <br><br>
+        <label for="author">Автор</label>
+        <input type="text" name="author" id="author">
+        <br><br>
+        <label for="image1">Первая фото</label>
+        <input type="file" name="file1" id="image1">
+        <br><br>
+        <label for="image2">Вторая фото</label>
+        <input type="file" name="file2" id="image2">
+        <br><br>
+        <label for="image3">Третья фото</label>
+        <input type="file" name="file3" id="image3">
+        <hr>
+        <br><br>
+        <input type="submit" value="Добавить">
+        <button><a href="/">Назад</a></button>
+    </form>
 </div>
 
 </body>
