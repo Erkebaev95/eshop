@@ -8,8 +8,13 @@
 </head>
 <body>
 <h1>BUYSELL</h1><hr>
-<h4>Подробная информация о товаре</h4>
 <div>
+    <h4>Подробная информация о товаре</h4>
+
+    <div th:each="i : ${images}">
+        <img th:src="@{/images/{id}(id=${i.id})}" height="90px">
+    </div>
+
     <b>Название товара: </b><span th:text="${product.title}"></span>
     <br>
     <b>Описание товара: </b><span th:text="${product.description}"></span>
@@ -21,12 +26,14 @@
     <b>Автор: </b><span th:text="${product.author}"></span>
     <hr>
     <br><br>
-    <button>
-        <a th:href="@{editProduct/{id}(id=${product.id})}">Редактировать</a>
-    </button>
-    <button>
-        <a th:href="@{deleteProduct/{id}(id=${product.id})}">Удалить</a>
-    </button>
+    <form th:action="@{/product/delete/{id}(id=${product.id})}" method="post">
+        <input type="submit" value="Удалить товар"/>
+    </form>
+    <br>
+    <form th:action="@{editProduct/{id}(id=${product.id})}" method="post">
+        <input type="submit" value="Редактировать товар"/>
+    </form>
+    <br>
     <button>
         <a href="/">Назад</a>
     </button>
