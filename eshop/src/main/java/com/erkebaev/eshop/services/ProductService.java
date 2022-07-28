@@ -6,9 +6,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import com.erkebaev.eshop.model.Product;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -22,12 +24,11 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public void saveProduct(Product product, MultipartFile file1,
-                            MultipartFile file2, MultipartFile file3) throws IOException {
+    // add images and product
+    public void saveProduct(Product product, MultipartFile file1, MultipartFile file2, MultipartFile file3) throws IOException {
         Image image1;
         Image image2;
         Image image3;
-
         if (file1.getSize() != 0) {
             image1 = toImageEntity(file1);
             image1.setPreviewImage(true);
@@ -41,8 +42,9 @@ public class ProductService {
             image3 = toImageEntity(file3);
             product.addImageToProduct(image3);
         }
-
         log.info("Saving new Product. Title: {}; Author: {}", product.getTitle(), product.getAuthor());
+        Product productFromDb = productRepository.save(product);
+        productFromDb.setPreviewImageId(productFromDb.getImages().get(0).getId());
         productRepository.save(product);
     }
 
@@ -61,6 +63,6 @@ public class ProductService {
     }
 
     public Product getProductById(Long id) {
-       return productRepository.findById(id).orElse(null);
+        return productRepository.findById(id).orElse(null);
     }
 }
