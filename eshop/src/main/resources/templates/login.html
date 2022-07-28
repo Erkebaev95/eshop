@@ -1,0 +1,27 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BUYSELL</title>
+</head>
+<body>
+<h1>BUYSELL</h1><hr>
+<h4>Авторизация</h4>
+
+<form th:action="@{/login}" method="post">
+    <label for="email">Эл. почта: </label>
+    <input type="email" name="username" id="email">
+    <br><br>
+    <label for="pass">Пароль: </label>
+    <input type="password" name="password" id="pass">
+    <br><br>
+    <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+    <input type="submit" value="Вход"/>
+</form>
+<a th:href="@{/registration}">Зарегистрироваться</a>
+
+
+</body>
+</html>
