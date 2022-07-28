@@ -4,13 +4,23 @@
       lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>BUYSELL</title>
 </head>
 <body>
-<h1>BUYSELL</h1><hr>
+<h1>BUYSELL | <a th:href="@{/login}">Войти</a></h1><hr>
+<form th:action="@{/}" method="post">
+    <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+    <input type="submit" value="Выйти">
+</form>
+
 <div th:switch="${products}">
     <div>
-        <h4>Товары со всей Казахстана</h4>
+        <h3>Товары со всей Казахстана</h3>
+        <form th:action="@{/}" method="get">
+            <label for="search">Поиск по названию объявления: </label>
+            <input type="text" name="title" id="search"><br>
+            <input type="submit" value="Поиск"/>
+        </form>
 
         <div th:each="product : ${products}">
             <p><b th:text="${product.title}"></b> | <a th:href="@{/product/{id}(id=${product.id})}">Подробнее...</a></p>
@@ -46,7 +56,6 @@
         <br><br>
         <label for="image3">Третья фото</label>
         <input type="file" name="file3" id="image3">
-        <hr>
         <br><br>
         <input type="submit" value="Добавить">
         <button><a href="/">Назад</a></button>
