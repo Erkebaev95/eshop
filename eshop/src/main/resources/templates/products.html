@@ -7,59 +7,63 @@
     <title>BUYSELL</title>
 </head>
 <body>
-<h1>BUYSELL | <a th:href="@{/login}">Войти</a></h1><hr>
-<form th:action="@{/}" method="post">
-    <input type="hidden" name="_csrf" th:value="${_csrf.token}">
-    <input type="submit" value="Выйти">
-</form>
+<h1><a th:href="@{/}">BUYSELL</a></h1><hr>
+<div>
+    <div th:if="${user.email}">
+        <h3>Имя пользователя: <i th:text="${user.name}"></i></h3>
+        <form th:action="@{/logout}" method="post">
+            <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+            <input type="submit" value="Выйти">
+        </form>
+    </div>
+    <div th:if="${user.name == null}">
+        <h2><a th:href="@{/login}">Войти</a></h2>
+    </div>
+</div>
 
 <div th:switch="${products}">
-    <div>
-        <h3>Товары со всей Казахстана</h3>
-        <form th:action="@{/}" method="get">
-            <label for="search">Поиск по названию объявления: </label>
-            <input type="text" name="title" id="search"><br>
-            <input type="submit" value="Поиск"/>
-        </form>
-
-        <div th:each="product : ${products}">
-            <p><b th:text="${product.title}"></b> | <a th:href="@{/product/{id}(id=${product.id})}">Подробнее...</a></p>
-        </div>
-        <hr>
+    <h3>Товары со всей Казахстана</h3>
+    <form th:action="@{/}" method="get">
+        <label for="search">Поиск по названию объявления: </label>
+        <input type="text" name="title" id="search"><br>
+        <input type="submit" value="Поиск"/>
+    </form><hr>
+    <div th:each="product : ${products}">
+        <p><b th:text="${product.title}"></b> | <a th:href="@{/product/{id}(id=${product.id})}">Подробнее...</a></p>
     </div>
-    <br>
+    <hr><br>
 
-    <h3>Создать новый товар</h3>
-    <form th:action="@{/product/create}"
-          method="post" enctype="multipart/form-data">
-        <br><br>
-        <label for="name">Названия продукта</label>
-        <input type="text" name="title" id="name">
-        <br><br>
-        <label for="description">Описания</label>
-        <input type="text" name="description" id="description">
-        <br><br>
-        <label for="price">Цена</label>
-        <input type="number" name="price" id="price">
-        <br><br>
-        <label for="city">Город</label>
-        <input type="text" name="city" id="city">
-        <br><br>
-        <label for="author">Автор</label>
-        <input type="text" name="author" id="author">
-        <br><br>
-        <label for="image1">Первая фото</label>
-        <input type="file" name="file1" id="image1">
-        <br><br>
-        <label for="image2">Вторая фото</label>
-        <input type="file" name="file2" id="image2">
-        <br><br>
-        <label for="image3">Третья фото</label>
-        <input type="file" name="file3" id="image3">
-        <br><br>
-        <input type="submit" value="Добавить">
-        <button><a href="/">Назад</a></button>
-    </form>
+    <div th:if="${user.email}">
+        <h3>Создать новый товар</h3>
+        <form th:action="@{/product/create}"
+              method="post" enctype="multipart/form-data">
+            <br><br>
+            <label for="name">Названия продукта</label>
+            <input type="text" name="title" id="name">
+            <br><br>
+            <label for="description">Описания</label>
+            <input type="text" name="description" id="description">
+            <br><br>
+            <label for="price">Цена</label>
+            <input type="number" name="price" id="price">
+            <br><br>
+            <label for="city">Город</label>
+            <input type="text" name="city" id="city">
+            <br><br>
+            <label for="image1">Первая фото</label>
+            <input type="file" name="file1" id="image1">
+            <br><br>
+            <label for="image2">Вторая фото</label>
+            <input type="file" name="file2" id="image2">
+            <br><br>
+            <label for="image3">Третья фото</label>
+            <input type="file" name="file3" id="image3">
+            <br><br>
+            <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+            <input type="submit" value="Добавить">
+            <button><a href="/">Назад</a></button>
+        </form>
+    </div>
 </div>
 
 </body>
