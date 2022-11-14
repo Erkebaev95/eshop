@@ -17,13 +17,13 @@ public class UserController {
     // Login
     @GetMapping("/login")
     public String login() {
-        return "login";
+        return "shop/login";
     }
 
     // Registration
     @GetMapping("/registration")
     public String registration() {
-        return "registration";
+        return "shop/register";
     }
 
     @PostMapping("/registration")

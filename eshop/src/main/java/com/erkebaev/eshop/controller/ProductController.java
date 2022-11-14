@@ -15,8 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.security.Principal;
 
-@Controller
 @RequiredArgsConstructor
+@Controller
 public class ProductController {
     private final ProductService productService;
 
@@ -26,7 +26,7 @@ public class ProductController {
                             String title, Principal principal, Model model) {
         model.addAttribute("products", productService.list(title));
         model.addAttribute("user", productService.getUserByPrincipal(principal));
-        return "products";
+        return "shop/products";
     }
 
     // info
